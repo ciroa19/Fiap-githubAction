@@ -8,7 +8,15 @@ on:
 jobs:
   test_job:
     name: Executando o Job Teste
-    runs-on: self-hosted
+    runs-on: ubuntu-hosted
     steps:
       - name: Step 1
         uses: actions/checkout@v3
+      - name: Docker Login 
+        uses: docker/login-action@v3.3.0
+        with:      
+          username: 'Ciroa'
+          # Password or personal access token used to log against the Docker registry
+          password: TESTE_GITHUB
+   
+                
