@@ -17,3 +17,9 @@ jobs:
         with:      
           username: 'ciroa'
           password: ${{ secrets.TESTE_GITHUB }}
+      - name: Build and push Docker images 
+        uses: docker/build-push-action@v6.7.0
+        with:
+            context: .
+            tags: 'ciroa/testefiap:latest'
+            push: true
