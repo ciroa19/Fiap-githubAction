@@ -15,5 +15,5 @@ jobs:
       - name: Docker Login 
         uses: docker/login-action@v3
         with:      
-          username: 'Ciroa'
+          username: 'ciroa'
           password: ${{ secrets.TESTE_GITHUB }}
