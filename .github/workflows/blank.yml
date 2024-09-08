@@ -17,6 +17,6 @@ jobs:
         with:      
           username: 'Ciroa'
           # Password or personal access token used to log against the Docker registry
-          password: TESTE_GITHUB
+          password: ${{TESTE_GITHUB}}
    
                 
