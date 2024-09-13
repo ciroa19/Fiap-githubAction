@@ -1,0 +1,28 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout code
+      uses:  action/chechout@v3
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version:  '8.x'        
+    - name: Restore dependencias
+      run:  dotnet restore
+
+    - name: Build
+      run: dotnet build --confuguratioin Release --no-restore
+
+    - name:  Run Unit Tests 
+      run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
+      
