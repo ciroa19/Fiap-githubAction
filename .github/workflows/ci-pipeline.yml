@@ -4,25 +4,31 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout code
+    - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version:  '8.x'        
-    - name: Restore dependencias
-      run:  dotnet restore
+        dotnet-version: '8.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
 
     - name: Build
-      run: dotnet build --confuguratioin Release --no-restore
+      run: dotnet build --configuration Release --no-restore
 
-    - name:  Run Unit Tests 
+    - name: Run Unit Tests
+      run: dotnet test --configuration Release --no-build --logger trx
+
+    - name: Run Integration Tests
       run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
-      
