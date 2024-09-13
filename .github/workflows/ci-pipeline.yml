@@ -13,23 +13,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'  # Especifica a versão .NET 8.0
 
-    - name: Restore dependencies
-      run: dotnet restore
+      - name: Restore dependencies
+        run: dotnet restore
 
-    - name: Build
-      run: dotnet build tech-challenge-01-main/TechChallenge01.sln
+      - name: Build
+        run: dotnet build --configuration Release
 
+      - name: Run Unit Tests
+        run: dotnet test --configuration Release --no-build --logger trx
 
-    - name: Run Unit Tests
-      run: dotnet test --configuration Release --no-build --logger trx
-
-    - name: Run Integration Tests
-      run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
+      - name: Run Integration Tests
+        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
