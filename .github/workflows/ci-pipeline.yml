@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: .NET CI Pipeline
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,16 +19,19 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'  # Especifica a versão .NET 8.0
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./tech-challenge-01-main/TechChallenge01.sln
 
-      - name: Build
+      - name: Build Solution
         run: dotnet build ./tech-challenge-01-main/TechChallenge01.sln --configuration Release
+     
+      - name: Run Unit Tests - Application
+        run: dotnet test ./tests/TechChallenge01.Application.Tests/TechChallenge01.Application.Tests.csproj --configuration Release --no-build --logger trx
 
-      - name: Run Unit Tests
-        run: dotnet test ./tech-challenge-01-main/tests/TechChallenge01.Api.Tests/TechChallenge01.Api.Tests.csproj --configuration Release --no-build --logger trx
+      - name: Run Unit Tests - Domain
+        run: dotnet test ./TechChallenge01.Domain.Tests/TechChallenge01.Domain.Tests.csproj --configuration Release --no-build --logger trx
 
       - name: Run Integration Tests
-        run: dotnet test ./tech-challenge-01-main/tests/TechChallenge01.Application.Tests/TechChallenge01.Application.Tests.csproj --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
+        run: dotnet test ./tests/TechChallenge01.Api.Tests/TechChallenge01.Api.Tests.csproj  --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
