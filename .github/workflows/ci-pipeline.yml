@@ -28,7 +28,7 @@ jobs:
         run: dotnet build ./tech-challenge-01-main/TechChallenge01.sln --configuration Release
 
       - name: Run Unit Tests
-        run: dotnet test --configuration Release --no-build --logger trx
+        run: dotnet test ./tech-challenge-01-main/tests/TechChallenge01.Api.Tests/TechChallenge01.Api.Tests.csproj --configuration Release --no-build --logger trx
 
       - name: Run Integration Tests
-        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
+        run: dotnet test ./tech-challenge-01-main/tests/TechChallenge01.Application.Tests/TechChallenge01.Application.Tests.csproj --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
