@@ -25,7 +25,8 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build tech-challenge-01-main/TechChallenge01.sln
+
 
     - name: Run Unit Tests
       run: dotnet test --configuration Release --no-build --logger trx
