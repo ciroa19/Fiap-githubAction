@@ -31,12 +31,12 @@ jobs:
         
       # Passo 5: Executar testes de integração, filtrando apenas os testes de integração se houver uma filtragem específica
       - name: Run Integration Tests
-        run: dotnet test ./tech-challenge-01-main/tests/TechChallenge01.Api.Tests/TechChallenge01.Api.Tests.csproj --configuration Release --no-build --filter FullyQualifiedName~IntegrationTests
+        run: dotnet test ./tech-challenge-01-main/tests/TechChallenge01.Api.Tests/TechChallenge01.Api.Tests.csproj --configuration Release --no-build --verbosity normal --filter FullyQualifiedName~IntegrationTests
       
       # Passo 6: Executar testes unitários específicos do projeto de Domínio
       - name: Run Unit Tests - Domain
-        run: dotnet test ./tech-challenge-01-main/TechChallenge01.Domain.Tests/TechChallenge01.Domain.Tests.csproj --configuration Release --no-build --logger trx
+        run: dotnet test ./tech-challenge-01-main/TechChallenge01.Domain.Tests/TechChallenge01.Domain.Tests.csproj --configuration Release --no-build --verbosity normal --logger trx
         
       # Passo 7: Executar testes unitários específicos do projeto de API
       - name: Run Unit Tests - Application
-        run: dotnet test ./tech-challenge-01-main/tests/TechChallenge01.Application.Tests/TechChallenge01.Application.Tests.csproj --verbosity normal --configuration Release --no-build --logger trx
+        run: dotnet test ./tech-challenge-01-main/tests/TechChallenge01.Application.Tests/TechChallenge01.Application.Tests.csproj  --configuration Release --no-build  --verbosity normal --logger trx
