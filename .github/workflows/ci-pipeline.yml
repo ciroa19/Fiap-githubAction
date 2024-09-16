@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build-and-test-dev:
     runs-on: ubuntu-latest
      # Passo 1: Fazer o checkout do código-fonte do repositório
     steps:
