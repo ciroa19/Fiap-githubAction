@@ -29,6 +29,7 @@ namespace TechChallenge01.Application.Tests
 
 
         [Fact(DisplayName = "Deve inserir um contato com sucesso")]
+        [Trait("Application", "ContactsController")]
         public async Task Should_Return_ContactCreatedWithSuccess()
         {
             //Arrange            
@@ -47,6 +48,7 @@ namespace TechChallenge01.Application.Tests
         [InlineData("", "1234567890", "joao.@example.com", "O nome é obrigatório.")]
         [InlineData("João Silva", "123", "joao.silva@example.com", "Número de telefone informado incorretamente, Modelo esperado: (dd) 99999-9999.")]
         [InlineData("João Silva", "1234567890", "invalid-email", "Formato de e-mail inválido.")]
+        [Trait("Application", "ContactsController")]
         public async Task Should_Return_ContactInvalidWith_ThrowsArgumentException(string Name, string phoneNumber, string email, string expectedErrorMessage)
         {
             //Arrange 
@@ -61,6 +63,7 @@ namespace TechChallenge01.Application.Tests
         }
 
         [Fact(DisplayName = "Deve retornar um contato filtrado por ddd")]
+        [Trait("Application", "ContactsController")]
         public async Task Should_Return_ContactFilteredByDDD()
         {
             //Arrange 
@@ -81,6 +84,7 @@ namespace TechChallenge01.Application.Tests
 
 
         [Fact(DisplayName = "Deve atualizar um contato com sucesso")]
+        [Trait("Application", "ContactsController")]
         public async Task Should_Return_Contact_Update_ShouldWithSuccess()
         {
 
@@ -97,6 +101,7 @@ namespace TechChallenge01.Application.Tests
         }
 
         [Fact(DisplayName = "Deve remover um contato com sucesso")]
+        [Trait("Application", "ContactsController")]
         public async Task Delete_ShouldRemoveContact()
         {
 
@@ -117,6 +122,7 @@ namespace TechChallenge01.Application.Tests
 
 
         [Fact(DisplayName = "Deve retornar um contato filtrado por Id")]
+        [Trait("Application", "ContactsController")]
         public void GetById_ShouldReturnContact_WhenIdExists()
         {
             // Arrange
@@ -134,6 +140,7 @@ namespace TechChallenge01.Application.Tests
 
 
         [Fact(DisplayName = "Deve retornar uma lista com todos os contatos")]
+        [Trait("Application", "ContactsController")]
         public async Task GetAll_ShouldReturnAllContacts()
         {
             // Arrange
