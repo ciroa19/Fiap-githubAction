@@ -22,7 +22,8 @@ jobs:
           sudo update-locale LANG=pt_BR.UTF-8 LC_ALL=pt_BR.UTF-8
           export LANG=pt_BR.UTF-8
           export LC_ALL=pt_BR.UTF-8
-        
+      - name: Check Locale
+        run: locale
       # Passo 3: Configurar o ambiente para usar a versão .NET 8.0
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
