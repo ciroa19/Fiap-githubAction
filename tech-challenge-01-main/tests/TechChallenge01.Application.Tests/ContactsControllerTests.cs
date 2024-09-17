@@ -1,4 +1,5 @@
 using Moq;
+using System.Globalization;
 using TechChallenge01.Application.UseCases;
 using TechChallenge01.Application.ViewModels;
 using TechChallenge01.Domain.Core;
@@ -25,6 +26,9 @@ namespace TechChallenge01.Application.Tests
             _getConcatUseCase = new GetContactsUseCase(_contactRepositoryMock.Object);
             _deleteConcatUseCase = new DeleteContactUseCase(_contactRepositoryMock.Object);
             _updateConcatUseCase = new UpdateContactUseCase(_contactRepositoryMock.Object);
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("pt-BR");
         }
 
 
