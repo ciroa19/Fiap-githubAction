@@ -70,7 +70,7 @@ namespace TechChallenge01.Application.Tests
 
             var contacts = new List<Contact>
             {
-                new Contact( "João Silva", new PhoneNumber("11-99999-9999"),  "john.doe@example.com"  )
+                new( "João Silva", new PhoneNumber("11-99999-9999"),  "john.doe@example.com"  )
             };
             //Act
             _contactRepositoryMock.Setup(r => r.GetByDDD(It.IsAny<string?>())).ReturnsAsync(contacts);
@@ -88,7 +88,8 @@ namespace TechChallenge01.Application.Tests
         public async Task Should_Return_Contact_Update_ShouldWithSuccess()
         {
 
-            var Contact = new Contact { Id = 1, Name = "Contato Atualizado", Email = "atualizado@example.com", PhoneNumber = new PhoneNumber("11333333333") };
+            var Contact = new Contact (1,  "Contato Atualizado", "atualizado@example.com", new PhoneNumber("11333333333") );
+            Contact.Id = 1;
             var updateRequest = new UpdateContactRequest(((int)Contact.Id), Contact.Name, Contact.PhoneNumber.Value, Contact.Email);
             _contactRepositoryMock.Setup(service => service.GetByIdAsync(1))
                                .ReturnsAsync(Contact);
@@ -106,7 +107,10 @@ namespace TechChallenge01.Application.Tests
         {
 
             // Arrange
-            var Contact = new Contact { Id = 1, Name = "Contato Atualizado", Email = "atualizado@example.com", PhoneNumber = new PhoneNumber("11333333333") };
+            var Contact = new Contact(1, "Contato Atualizado", "atualizado@example.com", new PhoneNumber("11333333333"))
+            {
+                Id = 1
+            };
             _contactRepositoryMock.Setup(service => service.GetByIdAsync(1))
                           .ReturnsAsync(Contact);
             _contactRepositoryMock.Setup(service => service.Delete(Contact));
@@ -126,8 +130,8 @@ namespace TechChallenge01.Application.Tests
         public void GetById_ShouldReturnContact_WhenIdExists()
         {
             // Arrange
-            var contact = new Contact("Teste", new PhoneNumber("1234567890"), "test@example.com");
-            contact.Id = 1;
+            var contact = new Contact(1,"Teste", "test@example.com", new PhoneNumber("1234567890") );
+          
             _contactRepositoryMock.Setup(r => r.GetByIdAsync(1)).ReturnsAsync(contact);
 
             // Act
@@ -146,8 +150,8 @@ namespace TechChallenge01.Application.Tests
             // Arrange
             var contacts = new List<Contact>
             {
-                new Contact { Id = 1, Name = "teste 1", Email = "teste1@example.com", PhoneNumber = new PhoneNumber( "1234567890" )},
-                new Contact { Id = 2, Name = "TESTE 2", Email = "teste2@example.com", PhoneNumber = new PhoneNumber( "1187654321") }
+                new(1, "teste 1", "teste1@example.com", new PhoneNumber("1234567890")),
+                new(2, "TESTE 2", "teste2@example.com", new PhoneNumber("1187654321"))
             };
             _contactRepositoryMock.Setup(repo => repo.GetAll()).ReturnsAsync(contacts);
 
@@ -156,7 +160,7 @@ namespace TechChallenge01.Application.Tests
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(2, result.Count());
+            Assert.Equal(2, result.Count);
             _contactRepositoryMock.Verify(repo => repo.GetAll(), Times.Once);
         }
     }

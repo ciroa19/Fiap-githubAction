@@ -9,15 +9,21 @@ public class Contact
 {
     [Key]
     [Column("id")]
-    public long Id { get; set; }
+    public long Id { get;  set; } 
     [Column("name")]
-    public string Name { get; set; }
-    public PhoneNumber PhoneNumber { get; set; }
+    public string Name { get; protected set; } = string.Empty;
+    public PhoneNumber PhoneNumber { get; protected set; }
     [Column("email")]
-    public string Email { get; set; }
+    public string Email { get; protected set; } =  string.Empty; 
     public Contact() { }
-
-    public Contact(string name, PhoneNumber phoneNumber, string email)
+    public Contact(long id, string name, string email, PhoneNumber phoneNumber  )
+    {
+        Id = id;
+        PhoneNumber = phoneNumber;
+        Name = name;
+        Email = email;
+    }
+        public Contact(string name, PhoneNumber phoneNumber, string email)
     {
         PhoneNumber = phoneNumber;
         Name = name;

@@ -30,8 +30,8 @@ namespace TechChallenge01.Domain.ValueObjects
             }
         }
 
-        public string Value { get; private set; }
-        public string DDD { get; private set; }
+        public string Value { get; private set; } = string.Empty;
+        public string DDD { get; private set; }=string.Empty;
 
         public override string ToString()
         {
